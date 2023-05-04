@@ -1,5 +1,4 @@
 package com.example.ProjectDemo.controller;
-
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,31 +11,29 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.ProjectDemo.common.model.ResultModel;
-import com.example.ProjectDemo.models.Account;
-import com.example.ProjectDemo.repositories.IAccountRepository;
+import com.example.ProjectDemo.models.User;
+import com.example.ProjectDemo.repositories.UserRepository;
 
 @RestController
-@RequestMapping("/account")
-public class AccountController {
+@RequestMapping("/user")
+public class UserController {
 
     @Autowired
-    IAccountRepository accountRepo;
+    UserRepository userRepository;
     
     @GetMapping("/")
-	public ResponseEntity<List<Account>> listAllAccount(){
-		List<Account> listAccount= accountRepo.findAll();
-		if(listAccount.isEmpty()) {
+	public ResponseEntity<List<User>> listAllAccount(){
+		List<User> listUser= userRepository.findAll();
+		if(listUser.isEmpty()) {
 			return new ResponseEntity(HttpStatus.NO_CONTENT);
 		}
-		return new ResponseEntity<List<Account>>(listAccount, HttpStatus.OK);
+		return new ResponseEntity<List<User>>(listUser, HttpStatus.OK);
 	}
 
     @PostMapping("/add")
-    public ResponseEntity<ResultModel> addAccount(@RequestBody Account account){
+    public ResponseEntity<ResultModel> addAccount(@RequestBody User user){
         ResultModel result;
-        account.setLast_login(new java.util.Date());
-        account.setCreated_on(new java.util.Date());
-        Account acc = accountRepo.save(account);
+        User acc = userRepository.save(user);
         result = new ResultModel(null, "Fail", false, 0);
         if (acc != null){
             result = new ResultModel(null, "Success", true, 0);
