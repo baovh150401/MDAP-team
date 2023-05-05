@@ -14,7 +14,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
-import com.example.mdap.common.exception.AuthEntryPointJwt;
+import com.example.mdap.security.jwt.AuthEntryPointJwt;
 import com.example.mdap.security.jwt.AuthTokenFilter;
 import com.example.mdap.security.services.UserDetailsServiceImpl;
 
